@@ -24,6 +24,7 @@ private:
     int MenuOptionSelect;
     sf::Font font;
     sf::Text MainMenu[MAX_MAIN_MENU_ITEMS];
+    sf::Text MainTitle;
     sf::Sprite background;
     sf::Texture BackgroundTexture;
     sf::Vector2u TextureSize;  //Added to store texture size.
