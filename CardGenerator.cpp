@@ -1,4 +1,23 @@
-//
-// Created by Jadon Hladyshevsky on 2020-03-02.
-//
+#include "menu.h"
+#include "CardGenerator.h"
 
+#include <iostream>
+
+Deck::Deck() {
+    Cards( {
+                   {} ,
+                   {} ,
+                   {} ,
+                   {} ,
+                   {} ,
+                   {} ,
+                   {} ,
+                   {} ,
+                   {} ,
+                   {} ,
+                   {} ,
+                   {} ,
+                   {} ,
+    })
+
+}

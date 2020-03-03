@@ -5,6 +5,8 @@
 #define SFML_NO_DEPRECATED_WARNINGS
 
 int main() {
+    enum State {sMenu, Options, Game};
+    State saved = sMenu;
 // initalizing window display
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
@@ -27,56 +29,77 @@ int main() {
     Menu MainMenu(window.getSize().x, window.getSize().y,window);
 
 //General Input Flow
-    while(window.isOpen()){
+    while(window.isOpen()) {
         sf::Event event;
 
 // while there are pending events...
         while (window.pollEvent(event)) {
-            // check the type of the event...
-            switch (event.type) {
-                // window closed
-                case sf::Event::Closed:
-                    std::cout << "Window has been closed, program ended" << std::endl;
-                    window.close();
-                    break;
-                case sf::Event::KeyPressed:
-                    switch (event.key.code)
-                    {
-                        case sf::Keyboard::Up:
-                            MainMenu.MoveUp();
-                            break;
 
-                        case sf::Keyboard::Down:
-                            MainMenu.MoveDown();
+            switch (saved) {
+                case sMenu:
+                    // check the type of the event...
+                    switch (event.type) {
+                        // window closed
+                        case sf::Event::Closed:
+                            std::cout << "Window has been closed, program ended" << std::endl;
+                            window.close();
                             break;
+                        case sf::Event::KeyPressed:
+                            switch (event.key.code) {
+                                case sf::Keyboard::Up:
+                                    MainMenu.MoveUp();
+                                    break;
 
-                        case sf::Keyboard::Return:
-                            switch (MainMenu.GetSelectedItem())
-                            {
-                                case 0:
-                                    std::cout << "Play button has been pressed" << std::endl;
+                                case sf::Keyboard::Down:
+                                    MainMenu.MoveDown();
                                     break;
-                                case 1:
-                                    std::cout << "Option button has been pressed" << std::endl;
-                                    break;
-                                case 2:
-                                    window.close();
+
+                                case sf::Keyboard::Return:
+                                    switch (MainMenu.GetSelectedItem()) {
+                                        case 0:
+                                            std::cout << "Play button has been pressed" << std::endl;
+                                            saved = Game;
+                                            //Add Code to Change to Play State
+                                            break;
+                                        case 1:
+                                            std::cout << "Option button has been pressed" << std::endl;
+                                            saved = Options;
+                                            //Add Code to Change to Option State
+                                            break;
+                                        case 2:
+                                            window.close();
+                                            break;
+                                    }
                                     break;
                             }
-
                             break;
                     }
 
-                    break;
+                case Options:;
+
+                case Game:
+
+                    ;
+
             }
+            break;
         }
+if (saved == sMenu) {
+    window.clear(sf::Color::Black);
 
-        window.clear(sf::Color::Black);
+    MainMenu.draw(window);
 
-        MainMenu.draw(window);
+    window.display();
+}
+else if (saved == Options) {
 
-        window.display();
+}
+else if (saved == Game) {
 
-        }
-return 0;
+
+
+}
+
+    }
+    return 0;
 }
