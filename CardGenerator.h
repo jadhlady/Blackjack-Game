@@ -25,9 +25,11 @@ class Deck {
 
 public:
     Deck();
+    void ShuffleDeck();
 
 private:
     const int SuitSize = 4;
     const int FaceSize = 13;
-    std::array<Card,52> Cards;
+    std::array<std::array<Card, 52>, 2> Cards;
 };
+

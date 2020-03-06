@@ -4,20 +4,33 @@
 #include <iostream>
 
 Deck::Deck() {
-    Cards( {
-                   {} ,
-                   {} ,
-                   {} ,
-                   {} ,
-                   {} ,
-                   {} ,
-                   {} ,
-                   {} ,
-                   {} ,
-                   {} ,
-                   {} ,
-                   {} ,
-                   {} ,
-    })
+
+    Cards = { {
+             {Hearts, Ace},
+             {Hearts, Ace}
+
+
+
+
+
+
+
+
+
+
+
+
+    }};
+
+
 
 }
+
+
+void ShuffleDeck() {
+
+
+
+
+}
+
