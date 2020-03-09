@@ -1,7 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
+#include <math.h>
 #include "menu.h"
+#include "CardGenerator.h"
 #define SFML_NO_DEPRECATED_WARNINGS
 
 int main() {
@@ -27,6 +29,8 @@ int main() {
 
 //Create Main Menu Class
     Menu MainMenu(window.getSize().x, window.getSize().y,window);
+//Create MainDeck Class
+    Deck MainDeck();
 
 //General Input Flow
     while(window.isOpen()) {
@@ -58,6 +62,7 @@ int main() {
                                     switch (MainMenu.GetSelectedItem()) {
                                         case 0:
                                             std::cout << "Play button has been pressed" << std::endl;
+                                            MainDeck().CheckCard();
                                             saved = Game;
                                             //Add Code to Change to Play State
                                             break;
