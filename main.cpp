@@ -30,7 +30,7 @@ int main() {
 //Create Main Menu Class
     Menu MainMenu(window.getSize().x, window.getSize().y,window);
 //Create MainDeck Class
-    Deck MainDeck();
+    Deck MainDeck;
 
 //General Input Flow
     while(window.isOpen()) {
@@ -62,13 +62,13 @@ int main() {
                                     switch (MainMenu.GetSelectedItem()) {
                                         case 0:
                                             std::cout << "Play button has been pressed" << std::endl;
-                                            MainDeck().CheckCard();
-                                            saved = Game;
+                                            MainDeck.CheckCard();
+                                            //saved = Game;
                                             //Add Code to Change to Play State
                                             break;
                                         case 1:
                                             std::cout << "Option button has been pressed" << std::endl;
-                                            saved = Options;
+                                            //saved = Options;
                                             //Add Code to Change to Option State
                                             break;
                                         case 2:
