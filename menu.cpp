@@ -1,5 +1,6 @@
 #include "menu.h"
 #include <iostream>
+#include "CardGenerator.h"
 
 
 Menu::Menu(float width, float height, sf::RenderWindow &window) {
@@ -61,6 +62,7 @@ void Menu::draw(sf::RenderWindow &window)
     for (int i = 0; i < MAX_MAIN_MENU_ITEMS; i++) {
             window.draw(MainMenu[i]);
         }
+
 }
 
 

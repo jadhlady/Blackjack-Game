@@ -1,5 +1,8 @@
 #include <iostream>
 #include <array>
+#define Location 10
+// 0-4 - Dealer's Hand
+// 5-10 - Player's Hand
 
 class Deck {
 
@@ -7,11 +10,17 @@ public:
     Deck();
     ~Deck();
     void ShuffleDeck();
-    void CheckCard();
-    void DisplayCardSuit(int SuitVal);
-    void DisplayCardFace(int FaceVal);
+    void CheckCard(sf::RenderWindow &window);
+    void DisplayCard(sf::RenderWindow &window, int SuitVal, int FaceVal);
+    int DrawCard = 0;
+    sf::Sprite CardDisplay[Location];
 
 private:
+    // Image Drawing Variables
+    sf::Texture TwoClubs,TwoDiamonds,TwoHearts,TwoSpades,ThreeClubs,ThreeDiamonds,ThreeHearts,ThreeSpades,FourClubs,FourDiamonds,FourHearts,FourSpades,FiveClubs,FiveDiamonds,FiveHearts,FiveSpades,
+                SixClubs,SixDiamonds,SixHearts,SixSpades,SevenClubs,SevenDiamonds,SevenHearts,SevenSpades,EightClubs,EightDiamonds,EightHearts,EightSpades,NineClubs,NineDiamonds,NineHearts,NineSpades,
+                TenClubs,TenDiamonds,TenHearts,TenSpades,JackClubs,JackDiamonds,JackHearts,JackSpades,QueenClubs,QueenDiamonds,QueenHearts,QueenSpades,KingClubs,KingDiamonds,KingHearts,KingSpades,
+                AceClubs,AceDiamonds,AceHearts,AceSpades;
     //            Ace = 1,
     //            Two = 2,
     //            Three = 3,

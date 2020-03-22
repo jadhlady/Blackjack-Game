@@ -3,12 +3,14 @@
 #include <iostream>
 #include <math.h>
 #include "menu.h"
+#include "Game.h"
 #include "CardGenerator.h"
 #define SFML_NO_DEPRECATED_WARNINGS
 
 int main() {
     enum State {sMenu, Options, Game};
     State saved = sMenu;
+    int CardDraw = 0;
 // initalizing window display
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
@@ -31,6 +33,8 @@ int main() {
     Menu MainMenu(window.getSize().x, window.getSize().y,window);
 //Create MainDeck Class
     Deck MainDeck;
+//Create Play Class
+    class Game Play;
 
 //General Input Flow
     while(window.isOpen()) {
@@ -62,8 +66,7 @@ int main() {
                                     switch (MainMenu.GetSelectedItem()) {
                                         case 0:
                                             std::cout << "Play button has been pressed" << std::endl;
-                                            MainDeck.CheckCard();
-                                            //saved = Game;
+                                            saved = Game;
                                             //Add Code to Change to Play State
                                             break;
                                         case 1:
@@ -79,15 +82,19 @@ int main() {
                             }
                             break;
                     }
-
+                    break;
                 case Options:;
-
                 case Game:
-
-                    ;
-
+                    switch (event.type) {
+                        case sf::Event::KeyPressed:
+                            switch (event.key.code) {
+                                case sf::Keyboard::Return:
+                                    MainDeck.CheckCard(window);
+                                    break;
+                            }
+                     break;
+                    }
             }
-            break;
         }
 if (saved == sMenu) {
     window.clear(sf::Color::Black);
@@ -100,8 +107,12 @@ else if (saved == Options) {
 
 }
 else if (saved == Game) {
+    window.clear(sf::Color::Black);
+    MainMenu.draw(window);
+    //Can Change card location by changing num (We will have dealer location, player locations, etc....
+    window.draw(MainDeck.CardDisplay[1]);
 
-
+    window.display();
 
 }
 
