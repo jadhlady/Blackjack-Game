@@ -4,7 +4,6 @@
 #include <math.h>
 #include "menu.h"
 #include "Game.h"
-#include "CardGenerator.h"
 #define SFML_NO_DEPRECATED_WARNINGS
 
 int main() {
@@ -34,7 +33,7 @@ int main() {
 //Create MainDeck Class
     Deck MainDeck;
 //Create Play Class
-    class Game Play;
+    class Game Play(window);
 
 //General Input Flow
     while(window.isOpen()) {
@@ -91,6 +90,9 @@ int main() {
                                 case sf::Keyboard::Return:
                                     MainDeck.CheckCard(window);
                                     break;
+                                case sf::Keyboard::Space:
+                                    MainDeck.CheckCard(window);
+                                    break;
                             }
                      break;
                     }
@@ -106,9 +108,9 @@ if (saved == sMenu) {
 else if (saved == Options) {
 
 }
-else if (saved == Game) {
+else if (saved == Game) { //Make new GameStart State to initialize cards etc? before moving to actual game state
     window.clear(sf::Color::Black);
-    MainMenu.draw(window);
+    Play.draw(window);
     //Can Change card location by changing num (We will have dealer location, player locations, etc....
     window.draw(MainDeck.CardDisplay[1]);
 
