@@ -165,6 +165,22 @@ Deck::Deck() {
         std::cout << "Texture Failed" << std::endl;
     }
 
+    CardDisplay[0].setScale(0.25,0.25);
+    CardDisplay[1].setScale(0.25,0.25);
+    CardDisplay[2].setScale(0.25,0.25); //To Be Changed When assets change / Make for variable window sizes
+    CardDisplay[3].setScale(0.25,0.25);
+    CardDisplay[4].setScale(0.25,0.25);
+    CardDisplay[5].setScale(0.25,0.25);
+    CardDisplay[6].setScale(0.25,0.25);
+    CardDisplay[7].setScale(0.25,0.25);
+    CardDisplay[8].setScale(0.25,0.25);
+    CardDisplay[9].setScale(0.25,0.25);
+    CardDisplay[10].setScale(0.25,0.25);
+
+    CardDisplay[1].setPosition(sf::Vector2f(500, 500));
+
+
+
     ShuffleDeck();
 }
 
@@ -180,7 +196,7 @@ void Deck::ShuffleDeck() {
 
 }
 
-void Deck::CheckCard(sf::RenderWindow &window) {
+void Deck::CheckCard(sf::RenderWindow &window,int CardLocation) {
     //switch
 if(CardIteration > 52) {
     ShuffleDeck();
@@ -188,13 +204,12 @@ if(CardIteration > 52) {
 }
 
     std::cout << "Displaying Card Chosen....\n";
-    DisplayCard(window, CardValue[CurrentCard[CardIteration]][0], CardValue[CurrentCard[CardIteration]][1]);
+    DisplayCard(window, CardValue[CurrentCard[CardIteration]][0], CardValue[CurrentCard[CardIteration]][1],CardLocation);
     CardIteration++;
 return;
 }
 
-void Deck::DisplayCard(sf::RenderWindow &window, int SuitVal, int FaceVal) {
-    int i =1;
+void Deck::DisplayCard(sf::RenderWindow &window, int SuitVal, int FaceVal, int i) {
     int Val = 0;
     switch (SuitVal) {
         case 0:

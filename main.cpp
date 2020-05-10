@@ -8,8 +8,11 @@
 
 int main() {
     enum State {sMenu, Options, Game};
+    enum State2 {Decide,DoNothing};
     State saved = sMenu;
-    int CardDraw = 0;
+    State2 Decision = DoNothing;
+    int DealerCards = 0;
+    int PlayerCards = 0;
 // initalizing window display
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
@@ -84,14 +87,20 @@ int main() {
                     break;
                 case Options:;
                 case Game:
-                    switch (event.type) {
-                        case sf::Event::KeyPressed:
-                            switch (event.key.code) {
-                                case sf::Keyboard::Return:
-                                    MainDeck.CheckCard(window);
-                                    break;
-                                case sf::Keyboard::Space:
-                                    MainDeck.CheckCard(window);
+                    switch (Decision) {
+                        case DoNothing:
+                            break;
+                        case Decide:
+                            switch (event.type) {
+                                case sf::Event::KeyPressed:
+                                    switch (event.key.code) {
+                                        case sf::Keyboard::Q:
+                                            //MAKE IT HIT
+                                            break;
+                                        case sf::Keyboard::Space:
+                                            //MAKE IT NOT HIT
+                                            break;
+                                    }
                                     break;
                             }
                      break;
@@ -108,12 +117,45 @@ if (saved == sMenu) {
 else if (saved == Options) {
 
 }
-else if (saved == Game) { //Make new GameStart State to initialize cards etc? before moving to actual game state
-    window.clear(sf::Color::Black);
-    Play.draw(window);
-    //Can Change card location by changing num (We will have dealer location, player locations, etc....
-    window.draw(MainDeck.CardDisplay[1]);
+else if (saved == Game) {
+//IMPLEMENT GAME LOGIC ALL HERE? LOL I GUESS
+    if( DealerCards == 0) {
+        MainDeck.CheckCard(window,0);
+        MainDeck.CheckCard(window,1);
+        DealerCards = 2;
+    }
 
+    if( PlayerCards == 0) {
+        MainDeck.CheckCard(window,5);
+        MainDeck.CheckCard(window,6);
+        PlayerCards = 2;
+    }
+
+//WAIT FOR OPTION
+//IMPLEMENT HIT/STAY COMMAND
+//going to want to do switch command to determine exactly what to do, enum for hit stay perhaps?
+//while(decision == 0) {
+//if(hit) {
+
+//}
+
+//if(stay) {
+
+
+
+//}
+
+//CALCULATIONS TO DETERMINE THE WINNER
+
+//RESET
+
+    window.clear(sf::Color::Black);
+    Play.draw(window); //Draws Background
+    //Can Change card location by changing num (We will have dealer location, player locations, etc....)
+    window.draw(MainDeck.CardDisplay[0]);
+    window.draw(MainDeck.CardDisplay[1]);
+    window.draw(MainDeck.CardDisplay[5]);
+    window.draw(MainDeck.CardDisplay[6]);
     window.display();
 
 }

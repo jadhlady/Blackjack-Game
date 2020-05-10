@@ -26,16 +26,6 @@ Game::Game(sf::RenderWindow &window) {
 }
 
 
-void GameStart(Deck deck) {
-
-//Can now write
-//START WITH THE DEALER GETTING TWO CARDS
-
-
-
-}
-
 void Game::draw(sf::RenderWindow &window) {
     window.draw(background);
-
     }

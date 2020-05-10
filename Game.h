@@ -6,8 +6,6 @@ class Game{
 public:
    Game(sf::RenderWindow &window);
    void draw(sf::RenderWindow &window);
-   void GameStart(Deck deck);
-
 
 private:
     int DealerCards = 0; //Going to do case statements to determine where to draw cards/clear them
