@@ -7,7 +7,7 @@
 #define SFML_NO_DEPRECATED_WARNINGS
 
 int main() {
-    enum State {sMenu, Options, Game};
+    enum State {sMenu, Options, Game,RoundWait};
     enum State2 {Decide,DoNothing};
     State saved = sMenu;
     State2 Decision = DoNothing;
@@ -105,9 +105,25 @@ int main() {
                                     }
                                     break;
                             }
-                     break;
+                            break;
                     }
+                case RoundWait:
+                    switch (event.type) {
+                        case sf::Event::KeyPressed:
+                            switch (event.key.code) {
+                                case sf::Keyboard::Q:
+                                    saved = sMenu;
+                                    break;
+                                case sf::Keyboard::Enter:
+                                    saved = Game;
+                                    //MAKE IT NOT HIT
+                                    break;
+                            }
+                            break;
+                    }
+                    break;
             }
+            break;
         }
 if (saved == sMenu) {
     window.clear(sf::Color::Black);
@@ -122,18 +138,18 @@ else if (saved == Options) {
 else if (saved == Game) {
 //IMPLEMENT GAME LOGIC ALL HERE? LOL I GUESS
     if( DealerCards == 0) {
-        CardVal = MainDeck.CheckCard(window,0);
+        CardVal = MainDeck.CheckCard(window,0, DealerHandVal);
         DealerHandVal += CardVal;
-        CardVal = MainDeck.CheckCard(window,1);
+        CardVal = MainDeck.CheckCard(window,1,DealerHandVal);
         DealerHandVal += CardVal;
         DealerCards = 2;
         std::cout << DealerHandVal;
     }
 
     if( PlayerCards == 0) {
-        CardVal = MainDeck.CheckCard(window,5);
+        CardVal = MainDeck.CheckCard(window,5,PlayerHandVal);
         PlayerHandVal += CardVal;
-        CardVal = MainDeck.CheckCard(window,6);
+        CardVal = MainDeck.CheckCard(window,6,PlayerHandVal);
         PlayerHandVal += CardVal;
         PlayerCards = 2;
         std::cout << PlayerHandVal;
@@ -145,7 +161,7 @@ Decision = Decide;
 if(hitstay == 1) { //STAY
     if(DealerHandVal < PlayerHandVal) {
         while (DealerHandVal < 17) {
-            CardVal = MainDeck.CheckCard(window, DealerCards);
+            CardVal = MainDeck.CheckCard(window, DealerCards,DealerHandVal);
             DealerHandVal += CardVal;
             DealerCards++;
         }
@@ -154,7 +170,7 @@ if(hitstay == 1) { //STAY
 }
 
 if(hitstay == 2) {
-    CardVal = MainDeck.CheckCard(window,(PlayerCards+5));
+    CardVal = MainDeck.CheckCard(window,(PlayerCards+5),PlayerHandVal);
     PlayerHandVal += CardVal;
     PlayerCards++;
     if( PlayerHandVal > 21 ) {
@@ -182,13 +198,19 @@ if( CheckforWin == 1 )
         std::cout << PlayerHandVal;
         std::cout << "\n";
         std::cout << "You Lose  :(\n";
+    }
+
+
+    //Tie Condition
+    if (DealerHandVal == PlayerHandVal) {
+        std::cout << DealerHandVal;
+        std::cout << "\n";
+        std::cout << PlayerHandVal;
+        std::cout << "\n";
+        std::cout << "Draw.\n";
 
     }
-//Reset the game to base state, have to manipulate sfml to do this properly
-//DealerCards = 0, DealerHandVal = 0, CardVal = 0;
-//PlayerCards = 0, PlayerHandVal = 0;
-//hitstay = 0, CheckforWin = 0;
-saved = Options;
+saved = RoundWait;
 
 }
 
@@ -214,6 +236,34 @@ saved = Options;
     window.draw(MainDeck.CardDisplay[9]);
     window.display();
 
+}
+else if(saved == RoundWait) {
+
+    //resetting
+    DealerCards = 0, DealerHandVal = 0, CardVal = 0;
+    PlayerCards = 0, PlayerHandVal = 0;
+    hitstay = 0, CheckforWin = 0;
+    State2 Decision = DoNothing;
+
+
+    window.clear(sf::Color::Black);
+    Play.draw(window); //Draws Background}
+    window.clear(sf::Color::Black);
+    Play.draw(window); //Draws Background
+    //Dealer Cards
+    window.draw(MainDeck.CardDisplay[0]);
+    window.draw(MainDeck.CardDisplay[1]);
+    window.draw(MainDeck.CardDisplay[2]);
+    window.draw(MainDeck.CardDisplay[3]);
+    window.draw(MainDeck.CardDisplay[4]);
+    //Player Cards
+    window.draw(MainDeck.CardDisplay[5]);
+    window.draw(MainDeck.CardDisplay[6]);
+    window.draw(MainDeck.CardDisplay[7]);
+    window.draw(MainDeck.CardDisplay[8]);
+    window.draw(MainDeck.CardDisplay[9]);
+    window.display();
+    window.display();
 }
 
     }

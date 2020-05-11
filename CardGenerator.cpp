@@ -215,7 +215,7 @@ void Deck::ShuffleDeck() {
 
 }
 
-int Deck::CheckCard(sf::RenderWindow &window,int CardLocation) {
+int Deck::CheckCard(sf::RenderWindow &window,int CardLocation,int HandVal) {
     //switch
 if(CardIteration > 52) {
     ShuffleDeck();
@@ -223,12 +223,12 @@ if(CardIteration > 52) {
 }
 
     std::cout << "Displaying Card Chosen....\n";
-    int Val = DisplayCard(window, CardValue[CurrentCard[CardIteration]][0], CardValue[CurrentCard[CardIteration]][1],CardLocation);
+    int Val = DisplayCard(window, CardValue[CurrentCard[CardIteration]][0], CardValue[CurrentCard[CardIteration]][1],CardLocation, HandVal);
     CardIteration++;
 return Val;
 }
 
-int Deck::DisplayCard(sf::RenderWindow &window, int SuitVal, int FaceVal, int i) {
+int Deck::DisplayCard(sf::RenderWindow &window, int SuitVal, int FaceVal, int i,int HandVal) {
     int Val = 0;
     switch (SuitVal) {
         case 0:
@@ -237,7 +237,12 @@ int Deck::DisplayCard(sf::RenderWindow &window, int SuitVal, int FaceVal, int i)
                 case 1:
                     std::cout << "Ace\n";
                     CardDisplay[i].setTexture(AceHearts);
-                    Val = 1;
+                    if(HandVal >= 11) {
+                        Val = 1;
+                    }
+                    else{
+                        Val = 11;
+                    }
                     break;
                 case 2:
                     std::cout << "Two\n";
@@ -307,7 +312,12 @@ int Deck::DisplayCard(sf::RenderWindow &window, int SuitVal, int FaceVal, int i)
                 case 1:
                     std::cout << "Ace\n";
                     CardDisplay[i].setTexture(AceClubs);
-                    Val = 1;
+                    if(HandVal >= 11) {
+                        Val = 1;
+                    }
+                    else{
+                        Val = 11;
+                    }
                     break;
                 case 2:
                     std::cout << "Two\n";
@@ -377,7 +387,12 @@ int Deck::DisplayCard(sf::RenderWindow &window, int SuitVal, int FaceVal, int i)
                 case 1:
                     std::cout << "Ace\n";
                     CardDisplay[i].setTexture(AceSpades);
-                    Val = 1;
+                    if(HandVal >= 11) {
+                        Val = 1;
+                    }
+                    else{
+                        Val = 11;
+                    }
                     break;
                 case 2:
                     std::cout << "Two\n";
@@ -447,7 +462,12 @@ int Deck::DisplayCard(sf::RenderWindow &window, int SuitVal, int FaceVal, int i)
                 case 1:
                     std::cout << "Ace\n";
                     CardDisplay[i].setTexture(AceDiamonds);
-                    Val = 1;
+                    if(HandVal >= 11) {
+                        Val = 1;
+                    }
+                    else{
+                        Val = 11;
+                    }
                     break;
                 case 2:
                     std::cout << "Two\n";
