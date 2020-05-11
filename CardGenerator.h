@@ -10,8 +10,8 @@ public:
     Deck();
     ~Deck();
     void ShuffleDeck();
-    void CheckCard(sf::RenderWindow &window, int CardLocation);
-    void DisplayCard(sf::RenderWindow &window, int SuitVal, int FaceVal,int CardLocation);
+    int CheckCard(sf::RenderWindow &window, int CardLocation);
+    int DisplayCard(sf::RenderWindow &window, int SuitVal, int FaceVal,int CardLocation);
     int DrawCard = 0;
     sf::Sprite CardDisplay[Location];
 

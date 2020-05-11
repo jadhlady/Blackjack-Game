@@ -11,8 +11,9 @@ int main() {
     enum State2 {Decide,DoNothing};
     State saved = sMenu;
     State2 Decision = DoNothing;
-    int DealerCards = 0;
-    int PlayerCards = 0;
+    int DealerCards = 0, DealerHandVal = 0, CardVal = 0;
+    int PlayerCards = 0, PlayerHandVal = 0;
+    int hitstay = 0, CheckforWin = 0;
 // initalizing window display
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
@@ -94,10 +95,11 @@ int main() {
                             switch (event.type) {
                                 case sf::Event::KeyPressed:
                                     switch (event.key.code) {
-                                        case sf::Keyboard::Q:
-                                            //MAKE IT HIT
+                                        case sf::Keyboard::H:
+                                            hitstay = 2;
                                             break;
                                         case sf::Keyboard::Space:
+                                            hitstay = 1;
                                             //MAKE IT NOT HIT
                                             break;
                                     }
@@ -120,42 +122,90 @@ else if (saved == Options) {
 else if (saved == Game) {
 //IMPLEMENT GAME LOGIC ALL HERE? LOL I GUESS
     if( DealerCards == 0) {
-        MainDeck.CheckCard(window,0);
-        MainDeck.CheckCard(window,1);
+        CardVal = MainDeck.CheckCard(window,0);
+        DealerHandVal += CardVal;
+        CardVal = MainDeck.CheckCard(window,1);
+        DealerHandVal += CardVal;
         DealerCards = 2;
+        std::cout << DealerHandVal;
     }
 
     if( PlayerCards == 0) {
-        MainDeck.CheckCard(window,5);
-        MainDeck.CheckCard(window,6);
+        CardVal = MainDeck.CheckCard(window,5);
+        PlayerHandVal += CardVal;
+        CardVal = MainDeck.CheckCard(window,6);
+        PlayerHandVal += CardVal;
         PlayerCards = 2;
+        std::cout << PlayerHandVal;
     }
-
 //WAIT FOR OPTION
 //IMPLEMENT HIT/STAY COMMAND
-//going to want to do switch command to determine exactly what to do, enum for hit stay perhaps?
-//while(decision == 0) {
-//if(hit) {
+Decision = Decide;
 
-//}
+if(hitstay == 1) { //STAY
+    if(DealerHandVal < PlayerHandVal) {
+        while (DealerHandVal < 17) {
+            CardVal = MainDeck.CheckCard(window, DealerCards);
+            DealerHandVal += CardVal;
+            DealerCards++;
+        }
+    }
+    CheckforWin = 1;
+}
 
-//if(stay) {
+if(hitstay == 2) {
+    CardVal = MainDeck.CheckCard(window,(PlayerCards+5));
+    PlayerHandVal += CardVal;
+    PlayerCards++;
+    if( PlayerHandVal > 21 ) {
+        CheckforWin = 1;
+    }
+}
+
+if( CheckforWin == 1 )
+{
+    //Win Condition
+    if( (DealerHandVal > 21) || ((PlayerHandVal > DealerHandVal) && (PlayerHandVal < 21))) {
+        std::cout << DealerHandVal;
+        std::cout << "\n";
+        std::cout << PlayerHandVal;
+        std::cout << "\n";
+        std::cout << "You Win!\n";
+    }
 
 
+    //Lose Condition
+    if( ((DealerHandVal > PlayerHandVal) && (DealerHandVal < 21)) || (PlayerHandVal > 21) ) {
+        std::cout << DealerHandVal;
+        std::cout << "\n";
+        std::cout << PlayerHandVal;
+        std::cout << "\n";
+        std::cout << "You Lose  :(\n";
 
-//}
+    }
+//Reset the game to base state, have to manipulate sfml to do this properly
+//DealerCards = 0, DealerHandVal = 0, CardVal = 0;
+//PlayerCards = 0, PlayerHandVal = 0;
+//hitstay = 0, CheckforWin = 0;
+saved = Options;
 
-//CALCULATIONS TO DETERMINE THE WINNER
+}
 
-//RESET
 
     window.clear(sf::Color::Black);
     Play.draw(window); //Draws Background
-    //Can Change card location by changing num (We will have dealer location, player locations, etc....)
+    //Dealer Cards
     window.draw(MainDeck.CardDisplay[0]);
     window.draw(MainDeck.CardDisplay[1]);
+    window.draw(MainDeck.CardDisplay[2]);
+    window.draw(MainDeck.CardDisplay[3]);
+    window.draw(MainDeck.CardDisplay[4]);
+    //Player Cards
     window.draw(MainDeck.CardDisplay[5]);
     window.draw(MainDeck.CardDisplay[6]);
+    window.draw(MainDeck.CardDisplay[7]);
+    window.draw(MainDeck.CardDisplay[8]);
+    window.draw(MainDeck.CardDisplay[9]);
     window.display();
 
 }

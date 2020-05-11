@@ -177,9 +177,19 @@ Deck::Deck() {
     CardDisplay[9].setScale(0.25,0.25);
     CardDisplay[10].setScale(0.25,0.25);
 
-    CardDisplay[1].setPosition(sf::Vector2f(500, 500));
-
-
+    //Dealer Cards
+    CardDisplay[0].setPosition(sf::Vector2f(100, 100));
+    CardDisplay[1].setPosition(sf::Vector2f(200, 100));
+    CardDisplay[2].setPosition(sf::Vector2f(300, 100));
+    CardDisplay[3].setPosition(sf::Vector2f(400, 100));
+    CardDisplay[4].setPosition(sf::Vector2f(500, 100));
+    //Player Cards
+    CardDisplay[5].setPosition(sf::Vector2f(100, 500));
+    CardDisplay[6].setPosition(sf::Vector2f(200, 500));
+    CardDisplay[7].setPosition(sf::Vector2f(300, 500));
+    CardDisplay[8].setPosition(sf::Vector2f(400, 500));
+    CardDisplay[9].setPosition(sf::Vector2f(500, 500));
+    CardDisplay[10].setPosition(sf::Vector2f(600, 500));
 
     ShuffleDeck();
 }
@@ -196,7 +206,7 @@ void Deck::ShuffleDeck() {
 
 }
 
-void Deck::CheckCard(sf::RenderWindow &window,int CardLocation) {
+int Deck::CheckCard(sf::RenderWindow &window,int CardLocation) {
     //switch
 if(CardIteration > 52) {
     ShuffleDeck();
@@ -204,12 +214,12 @@ if(CardIteration > 52) {
 }
 
     std::cout << "Displaying Card Chosen....\n";
-    DisplayCard(window, CardValue[CurrentCard[CardIteration]][0], CardValue[CurrentCard[CardIteration]][1],CardLocation);
+    int Val = DisplayCard(window, CardValue[CurrentCard[CardIteration]][0], CardValue[CurrentCard[CardIteration]][1],CardLocation);
     CardIteration++;
-return;
+return Val;
 }
 
-void Deck::DisplayCard(sf::RenderWindow &window, int SuitVal, int FaceVal, int i) {
+int Deck::DisplayCard(sf::RenderWindow &window, int SuitVal, int FaceVal, int i) {
     int Val = 0;
     switch (SuitVal) {
         case 0:
@@ -218,54 +228,67 @@ void Deck::DisplayCard(sf::RenderWindow &window, int SuitVal, int FaceVal, int i
                 case 1:
                     std::cout << "Ace\n";
                     CardDisplay[i].setTexture(AceHearts);
+                    Val = 1;
                     break;
                 case 2:
                     std::cout << "Two\n";
                     CardDisplay[i].setTexture(TwoHearts);
+                    Val = 2;
                     break;
                 case 3:
                     std::cout << "Three\n";
                     CardDisplay[i].setTexture(ThreeHearts);
+                    Val = 3;
                     break;
                 case 4:
                     std::cout << "Four\n";
                     CardDisplay[i].setTexture(FourHearts);
+                    Val = 4;
                     break;
                 case 5:
                     std::cout << "Five\n";
                     CardDisplay[i].setTexture(FiveHearts);
+                    Val = 5;
                     break;
                 case 6:
                     std::cout << "Six\n";
                     CardDisplay[i].setTexture(SixHearts);
+                    Val = 6;
                     break;
                 case 7:
                     std::cout << "Seven\n";
                     CardDisplay[i].setTexture(SevenHearts);
+                    Val = 7;
                     break;
                 case 8:
                     std::cout << "Eight\n";
                     CardDisplay[i].setTexture(EightHearts);
+                    Val = 8;
                     break;
                 case 9:
                     std::cout << "Nine\n";
                     CardDisplay[i].setTexture(NineHearts);
+                    Val = 9;
                     break;
                 case 10:
                     std::cout << "Ten\n";
                     CardDisplay[i].setTexture(TenHearts);
+                    Val = 10;
                     break;
                 case 11:
                     std::cout << "Jack\n";
                     CardDisplay[i].setTexture(JackHearts);
+                    Val = 10;
                     break;
                 case 12:
                     std::cout << "Queen\n";
                     CardDisplay[i].setTexture(QueenHearts);
+                    Val = 10;
                     break;
                 case 13:
                     std::cout << "King\n";
                     CardDisplay[i].setTexture(KingHearts);
+                    Val = 10;
                     break;
             }
             break;
@@ -275,54 +298,67 @@ void Deck::DisplayCard(sf::RenderWindow &window, int SuitVal, int FaceVal, int i
                 case 1:
                     std::cout << "Ace\n";
                     CardDisplay[i].setTexture(AceClubs);
+                    Val = 1;
                     break;
                 case 2:
                     std::cout << "Two\n";
                     CardDisplay[i].setTexture(TwoClubs);
+                    Val = 2;
                     break;
                 case 3:
                     std::cout << "Three\n";
                     CardDisplay[i].setTexture(ThreeClubs);
+                    Val = 3;
                     break;
                 case 4:
                     std::cout << "Four\n";
                     CardDisplay[i].setTexture(FourClubs);
+                    Val = 4;
                     break;
                 case 5:
                     std::cout << "Five\n";
                     CardDisplay[i].setTexture(FiveClubs);
+                    Val = 5;
                     break;
                 case 6:
                     std::cout << "Six\n";
                     CardDisplay[i].setTexture(SixClubs);
+                    Val = 6;
                     break;
                 case 7:
                     std::cout << "Seven\n";
                     CardDisplay[i].setTexture(SevenClubs);
+                    Val = 7;
                     break;
                 case 8:
                     std::cout << "Eight\n";
                     CardDisplay[i].setTexture(EightClubs);
+                    Val = 8;
                     break;
                 case 9:
                     std::cout << "Nine\n";
                     CardDisplay[i].setTexture(NineClubs);
+                    Val = 9;
                     break;
                 case 10:
                     std::cout << "Ten\n";
                     CardDisplay[i].setTexture(TenClubs);
+                    Val = 10;
                     break;
                 case 11:
                     std::cout << "Jack\n";
                     CardDisplay[i].setTexture(JackClubs);
+                    Val = 10;
                     break;
                 case 12:
                     std::cout << "Queen\n";
                     CardDisplay[i].setTexture(QueenClubs);
+                    Val = 10;
                     break;
                 case 13:
                     std::cout << "King\n";
                     CardDisplay[i].setTexture(KingClubs);
+                    Val = 10;
                     break;
             }
             break;
@@ -332,54 +368,67 @@ void Deck::DisplayCard(sf::RenderWindow &window, int SuitVal, int FaceVal, int i
                 case 1:
                     std::cout << "Ace\n";
                     CardDisplay[i].setTexture(AceSpades);
+                    Val = 1;
                     break;
                 case 2:
                     std::cout << "Two\n";
                     CardDisplay[i].setTexture(TwoSpades);
+                    Val = 2;
                     break;
                 case 3:
                     std::cout << "Three\n";
                     CardDisplay[i].setTexture(ThreeSpades);
+                    Val = 3;
                     break;
                 case 4:
                     std::cout << "Four\n";
                     CardDisplay[i].setTexture(FourSpades);
+                    Val = 4;
                     break;
                 case 5:
                     std::cout << "Five\n";
                     CardDisplay[i].setTexture(FiveSpades);
+                    Val = 5;
                     break;
                 case 6:
                     std::cout << "Six\n";
                     CardDisplay[i].setTexture(SixSpades);
+                    Val = 6;
                     break;
                 case 7:
                     std::cout << "Seven\n";
                     CardDisplay[i].setTexture(SevenSpades);
+                    Val = 7;
                     break;
                 case 8:
                     std::cout << "Eight\n";
                     CardDisplay[i].setTexture(EightSpades);
+                    Val = 8;
                     break;
                 case 9:
                     std::cout << "Nine\n";
                     CardDisplay[i].setTexture(NineSpades);
+                    Val = 9;
                     break;
                 case 10:
                     std::cout << "Ten\n";
                     CardDisplay[i].setTexture(TenSpades);
+                    Val = 10;
                     break;
                 case 11:
                     std::cout << "Jack\n";
                     CardDisplay[i].setTexture(JackSpades);
+                    Val = 10;
                     break;
                 case 12:
                     std::cout << "Queen\n";
                     CardDisplay[i].setTexture(QueenSpades);
+                    Val = 10;
                     break;
                 case 13:
                     std::cout << "King\n";
                     CardDisplay[i].setTexture(KingSpades);
+                    Val = 10;
                     break;
             }
             break;
@@ -389,58 +438,71 @@ void Deck::DisplayCard(sf::RenderWindow &window, int SuitVal, int FaceVal, int i
                 case 1:
                     std::cout << "Ace\n";
                     CardDisplay[i].setTexture(AceDiamonds);
+                    Val = 1;
                     break;
                 case 2:
                     std::cout << "Two\n";
                     CardDisplay[i].setTexture(TwoDiamonds);
+                    Val = 2;
                     break;
                 case 3:
                     std::cout << "Three\n";
                     CardDisplay[i].setTexture(ThreeDiamonds);
+                    Val = 3;
                     break;
                 case 4:
                     std::cout << "Four\n";
                     CardDisplay[i].setTexture(FourDiamonds);
+                    Val = 4;
                     break;
                 case 5:
                     std::cout << "Five\n";
                     CardDisplay[i].setTexture(FiveDiamonds);
+                    Val = 5;
                     break;
                 case 6:
                     std::cout << "Six\n";
                     CardDisplay[i].setTexture(SixDiamonds);
+                    Val = 6;
                     break;
                 case 7:
                     std::cout << "Seven\n";
                     CardDisplay[i].setTexture(SevenDiamonds);
+                    Val = 7;
                     break;
                 case 8:
                     std::cout << "Eight\n";
                     CardDisplay[i].setTexture(EightDiamonds);
+                    Val = 8;
                     break;
                 case 9:
                     std::cout << "Nine\n";
                     CardDisplay[i].setTexture(NineDiamonds);
+                    Val = 9;
                     break;
                 case 10:
                     std::cout << "Ten\n";
                     CardDisplay[i].setTexture(TenDiamonds);
+                    Val = 10;
                     break;
                 case 11:
                     std::cout << "Jack\n";
                     CardDisplay[i].setTexture(JackDiamonds);
+                    Val = 10;
                     break;
                 case 12:
                     std::cout << "Queen\n";
                     CardDisplay[i].setTexture(QueenDiamonds);
+                    Val = 10;
                     break;
                 case 13:
                     std::cout << "King\n";
                     CardDisplay[i].setTexture(KingDiamonds);
+                    Val = 10;
                     break;
             }
             break;
     }
-    return;
+    return Val;
 }
 
