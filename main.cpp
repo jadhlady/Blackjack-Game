@@ -107,6 +107,7 @@ int main() {
                             }
                             break;
                     }
+                    break;
                 case RoundWait:
                     switch (event.type) {
                         case sf::Event::KeyPressed:
@@ -115,6 +116,8 @@ int main() {
                                     saved = sMenu;
                                     break;
                                 case sf::Keyboard::Enter:
+                                    DealerCards = 0;
+                                    PlayerCards = 0;
                                     saved = Game;
                                     //MAKE IT NOT HIT
                                     break;
@@ -137,111 +140,114 @@ else if (saved == Options) {
 }
 else if (saved == Game) {
 //IMPLEMENT GAME LOGIC ALL HERE? LOL I GUESS
-    if( DealerCards == 0) {
-        CardVal = MainDeck.CheckCard(window,0, DealerHandVal);
+    if (DealerCards == 0) {
+        CardVal = MainDeck.CheckCard(window, 0, DealerHandVal);
         DealerHandVal += CardVal;
-        CardVal = MainDeck.CheckCard(window,1,DealerHandVal);
+        CardVal = MainDeck.CheckCard(window, 1, DealerHandVal);
         DealerHandVal += CardVal;
         DealerCards = 2;
         std::cout << DealerHandVal;
     }
 
-    if( PlayerCards == 0) {
-        CardVal = MainDeck.CheckCard(window,5,PlayerHandVal);
+    if (PlayerCards == 0) {
+        CardVal = MainDeck.CheckCard(window, 5, PlayerHandVal);
         PlayerHandVal += CardVal;
-        CardVal = MainDeck.CheckCard(window,6,PlayerHandVal);
+        CardVal = MainDeck.CheckCard(window, 6, PlayerHandVal);
         PlayerHandVal += CardVal;
         PlayerCards = 2;
         std::cout << PlayerHandVal;
     }
 //WAIT FOR OPTION
 //IMPLEMENT HIT/STAY COMMAND
-Decision = Decide;
+    Decision = Decide;
 
-if(hitstay == 1) { //STAY
-    if(DealerHandVal < PlayerHandVal) {
-        while (DealerHandVal < 17) {
-            CardVal = MainDeck.CheckCard(window, DealerCards,DealerHandVal);
-            DealerHandVal += CardVal;
-            DealerCards++;
+    if (hitstay == 1) { //STAY
+        if (DealerHandVal < PlayerHandVal) {
+            while (DealerHandVal < 17) {
+                CardVal = MainDeck.CheckCard(window, DealerCards, DealerHandVal);
+                DealerHandVal += CardVal;
+                DealerCards++;
+            }
         }
-    }
-    CheckforWin = 1;
-}
-
-if(hitstay == 2) {
-    CardVal = MainDeck.CheckCard(window,(PlayerCards+5),PlayerHandVal);
-    PlayerHandVal += CardVal;
-    PlayerCards++;
-    if( PlayerHandVal > 21 ) {
         CheckforWin = 1;
     }
-    hitstay = 0;
-}
 
-if( CheckforWin == 1 )
-{
-    //Win Condition
-    if( (DealerHandVal > 21) || ((PlayerHandVal > DealerHandVal) && (PlayerHandVal < 21))) {
-        std::cout << DealerHandVal;
-        std::cout << "\n";
-        std::cout << PlayerHandVal;
-        std::cout << "\n";
-        std::cout << "You Win!\n";
+    if (hitstay == 2) {
+        CardVal = MainDeck.CheckCard(window, (PlayerCards + 5), PlayerHandVal);
+        PlayerHandVal += CardVal;
+        PlayerCards++;
+        if (PlayerHandVal > 21) {
+            CheckforWin = 1;
+        }
+        hitstay = 0;
     }
 
+    if (CheckforWin == 1) {
+        //Win Condition
+        if ((DealerHandVal > 21) || ((PlayerHandVal > DealerHandVal) && (PlayerHandVal < 21))) {
+            std::cout << DealerHandVal;
+            std::cout << "\n";
+            std::cout << PlayerHandVal;
+            std::cout << "\n";
+            std::cout << "You Win!\n";
+        }
 
-    //Lose Condition
-    if( ((DealerHandVal > PlayerHandVal) && (DealerHandVal < 21)) || (PlayerHandVal > 21) ) {
-        std::cout << DealerHandVal;
-        std::cout << "\n";
-        std::cout << PlayerHandVal;
-        std::cout << "\n";
-        std::cout << "You Lose  :(\n";
+
+        //Lose Condition
+        if (((DealerHandVal > PlayerHandVal) && (DealerHandVal < 21)) || (PlayerHandVal > 21)) {
+            std::cout << DealerHandVal;
+            std::cout << "\n";
+            std::cout << PlayerHandVal;
+            std::cout << "\n";
+            std::cout << "You Lose  :(\n";
+        }
+
+
+        //Tie Condition
+        if (DealerHandVal == PlayerHandVal) {
+            std::cout << DealerHandVal;
+            std::cout << "\n";
+            std::cout << PlayerHandVal;
+            std::cout << "\n";
+            std::cout << "Draw.\n";
+
+        }
+        saved = RoundWait;
+
     }
-
-
-    //Tie Condition
-    if (DealerHandVal == PlayerHandVal) {
-        std::cout << DealerHandVal;
-        std::cout << "\n";
-        std::cout << PlayerHandVal;
-        std::cout << "\n";
-        std::cout << "Draw.\n";
-
-    }
-saved = RoundWait;
-
-}
 
 
     window.clear(sf::Color::Black);
     Play.draw(window); //Draws Background
-    if(CheckforWin == 0){
+    window.draw(MainDeck.CardDisplay[0]);
+    if (CheckforWin == 0) {
         window.draw(MainDeck.CardDisplay[10]);
     }
     //Dealer Cards
-    window.draw(MainDeck.CardDisplay[0]);
-    if( CheckforWin != 0) {
+    if (CheckforWin != 0) {
         window.draw(MainDeck.CardDisplay[1]);
     }
-    window.draw(MainDeck.CardDisplay[2]);
-    window.draw(MainDeck.CardDisplay[3]);
-    window.draw(MainDeck.CardDisplay[4]);
+    int DealerCardCheck = DealerCards;
+    for (int i = 2; (DealerCardCheck - 2) > 0; i++) {
+        window.draw(MainDeck.CardDisplay[i]);
+        DealerCardCheck--;
+    }
     //Player Cards
     window.draw(MainDeck.CardDisplay[5]);
     window.draw(MainDeck.CardDisplay[6]);
-    window.draw(MainDeck.CardDisplay[7]);
-    window.draw(MainDeck.CardDisplay[8]);
-    window.draw(MainDeck.CardDisplay[9]);
+    int PlayerCardCheck = PlayerCards;
+    for (int i = 7; (PlayerCardCheck - 2) > 0; i++) {
+        window.draw(MainDeck.CardDisplay[i]);
+        PlayerCardCheck--;
+    }
     window.display();
 
 }
 else if(saved == RoundWait) {
 
     //resetting
-    DealerCards = 0, DealerHandVal = 0, CardVal = 0;
-    PlayerCards = 0, PlayerHandVal = 0;
+    DealerHandVal = 0, CardVal = 0;
+    PlayerHandVal = 0;
     hitstay = 0, CheckforWin = 0;
     State2 Decision = DoNothing;
 
@@ -253,16 +259,19 @@ else if(saved == RoundWait) {
     //Dealer Cards
     window.draw(MainDeck.CardDisplay[0]);
     window.draw(MainDeck.CardDisplay[1]);
-    window.draw(MainDeck.CardDisplay[2]);
-    window.draw(MainDeck.CardDisplay[3]);
-    window.draw(MainDeck.CardDisplay[4]);
+    int DealerCardCheck = DealerCards;
+    for (int i = 2; (DealerCardCheck - 2) > 0; i++) {
+        window.draw(MainDeck.CardDisplay[i]);
+        DealerCardCheck--;
+    }
     //Player Cards
     window.draw(MainDeck.CardDisplay[5]);
     window.draw(MainDeck.CardDisplay[6]);
-    window.draw(MainDeck.CardDisplay[7]);
-    window.draw(MainDeck.CardDisplay[8]);
-    window.draw(MainDeck.CardDisplay[9]);
-    window.display();
+    int PlayerCardCheck = PlayerCards;
+    for (int i = 7; (PlayerCardCheck - 2) > 0; i++) {
+        window.draw(MainDeck.CardDisplay[i]);
+        PlayerCardCheck--;
+    }
     window.display();
 }
 
