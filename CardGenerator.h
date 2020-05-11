@@ -1,6 +1,6 @@
 #include <iostream>
 #include <array>
-#define Location 10
+#define Location 11
 // 0-4 - Dealer's Hand
 // 5-10 - Player's Hand
 
@@ -20,7 +20,7 @@ private:
     sf::Texture TwoClubs,TwoDiamonds,TwoHearts,TwoSpades,ThreeClubs,ThreeDiamonds,ThreeHearts,ThreeSpades,FourClubs,FourDiamonds,FourHearts,FourSpades,FiveClubs,FiveDiamonds,FiveHearts,FiveSpades,
                 SixClubs,SixDiamonds,SixHearts,SixSpades,SevenClubs,SevenDiamonds,SevenHearts,SevenSpades,EightClubs,EightDiamonds,EightHearts,EightSpades,NineClubs,NineDiamonds,NineHearts,NineSpades,
                 TenClubs,TenDiamonds,TenHearts,TenSpades,JackClubs,JackDiamonds,JackHearts,JackSpades,QueenClubs,QueenDiamonds,QueenHearts,QueenSpades,KingClubs,KingDiamonds,KingHearts,KingSpades,
-                AceClubs,AceDiamonds,AceHearts,AceSpades;
+                AceClubs,AceDiamonds,AceHearts,AceSpades,CardBack;
     //            Ace = 1,
     //            Two = 2,
     //            Three = 3,

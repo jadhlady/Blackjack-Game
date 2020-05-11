@@ -164,6 +164,10 @@ Deck::Deck() {
     if (!AceSpades.loadFromFile("../assets/images/cards/AS.png")) {
         std::cout << "Texture Failed" << std::endl;
     }
+    if (!CardBack.loadFromFile("../assets/images/cards/red_back.png")) {
+        std::cout << "Texture Failed" << std::endl;
+    }
+
 
     CardDisplay[0].setScale(0.25,0.25);
     CardDisplay[1].setScale(0.25,0.25);
@@ -177,6 +181,10 @@ Deck::Deck() {
     CardDisplay[9].setScale(0.25,0.25);
     CardDisplay[10].setScale(0.25,0.25);
 
+    //Card Cover
+    CardDisplay[10].setPosition(sf::Vector2f(200, 100));
+    CardDisplay[10].setTexture(CardBack);
+
     //Dealer Cards
     CardDisplay[0].setPosition(sf::Vector2f(100, 100));
     CardDisplay[1].setPosition(sf::Vector2f(200, 100));
@@ -189,7 +197,8 @@ Deck::Deck() {
     CardDisplay[7].setPosition(sf::Vector2f(300, 500));
     CardDisplay[8].setPosition(sf::Vector2f(400, 500));
     CardDisplay[9].setPosition(sf::Vector2f(500, 500));
-    CardDisplay[10].setPosition(sf::Vector2f(600, 500));
+
+
 
     ShuffleDeck();
 }

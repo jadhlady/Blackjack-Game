@@ -160,6 +160,7 @@ if(hitstay == 2) {
     if( PlayerHandVal > 21 ) {
         CheckforWin = 1;
     }
+    hitstay = 0;
 }
 
 if( CheckforWin == 1 )
@@ -194,9 +195,14 @@ saved = Options;
 
     window.clear(sf::Color::Black);
     Play.draw(window); //Draws Background
+    if(CheckforWin == 0){
+        window.draw(MainDeck.CardDisplay[10]);
+    }
     //Dealer Cards
     window.draw(MainDeck.CardDisplay[0]);
-    window.draw(MainDeck.CardDisplay[1]);
+    if( CheckforWin != 0) {
+        window.draw(MainDeck.CardDisplay[1]);
+    }
     window.draw(MainDeck.CardDisplay[2]);
     window.draw(MainDeck.CardDisplay[3]);
     window.draw(MainDeck.CardDisplay[4]);
