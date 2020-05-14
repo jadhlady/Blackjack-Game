@@ -13,7 +13,7 @@ int main() {
     State2 Decision = DoNothing;
     int DealerCards = 0, DealerHandVal = 0, CardVal = 0;
     int PlayerCards = 0, PlayerHandVal = 0;
-    int hitstay = 0, CheckforWin = 0;
+    int hitstay = 0, CheckforWin = 0, WinLoseDraw = 3;
 // initalizing window display
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
@@ -37,7 +37,7 @@ int main() {
 //Create MainDeck Class
     Deck MainDeck;
 //Create Play Class
-    class Game Play(window);
+    class Game Play(window.getSize().x, window.getSize().y,window);
 
 //General Input Flow
     while(window.isOpen()) {
@@ -118,6 +118,7 @@ int main() {
                                 case sf::Keyboard::Enter:
                                     DealerCards = 0;
                                     PlayerCards = 0;
+                                    WinLoseDraw = 3;
                                     saved = Game;
                                     //MAKE IT NOT HIT
                                     break;
@@ -190,6 +191,7 @@ else if (saved == Game) {
             std::cout << PlayerHandVal;
             std::cout << "\n";
             std::cout << "You Win!\n";
+            WinLoseDraw = 0;
         }
 
 
@@ -200,6 +202,7 @@ else if (saved == Game) {
             std::cout << PlayerHandVal;
             std::cout << "\n";
             std::cout << "You Lose  :(\n";
+            WinLoseDraw = 1;
         }
 
 
@@ -210,7 +213,7 @@ else if (saved == Game) {
             std::cout << PlayerHandVal;
             std::cout << "\n";
             std::cout << "Draw.\n";
-
+            WinLoseDraw = 2;
         }
         saved = RoundWait;
 
@@ -218,7 +221,7 @@ else if (saved == Game) {
 
 
     window.clear(sf::Color::Black);
-    Play.draw(window); //Draws Background
+    Play.draw(window, WinLoseDraw); //Draws Background
     window.draw(MainDeck.CardDisplay[0]);
     if (CheckforWin == 0) {
         window.draw(MainDeck.CardDisplay[10]);
@@ -253,9 +256,9 @@ else if(saved == RoundWait) {
 
 
     window.clear(sf::Color::Black);
-    Play.draw(window); //Draws Background}
+    Play.draw(window, WinLoseDraw); //Draws Background}
     window.clear(sf::Color::Black);
-    Play.draw(window); //Draws Background
+    Play.draw(window, WinLoseDraw); //Draws Background
     //Dealer Cards
     window.draw(MainDeck.CardDisplay[0]);
     window.draw(MainDeck.CardDisplay[1]);

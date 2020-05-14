@@ -18,7 +18,7 @@ Menu::Menu(float width, float height, sf::RenderWindow &window) {
         background.setScale(ScaleX, ScaleY);      //Set scale.
 
         if (!font.loadFromFile("../assets/fonts/Lato.ttf")) {
-            std::cout << "Can't Load Font, It's Over" << std::endl;
+            std::cout << "Can't Load Font" << std::endl;
         }
 
         MainTitle.setFont(font);
