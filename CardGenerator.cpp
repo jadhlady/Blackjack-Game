@@ -169,34 +169,34 @@ Deck::Deck() {
     }
 
 
-    CardDisplay[0].setScale(0.25,0.25);
-    CardDisplay[1].setScale(0.25,0.25);
-    CardDisplay[2].setScale(0.25,0.25); //To Be Changed When assets change / Make for variable window sizes
-    CardDisplay[3].setScale(0.25,0.25);
-    CardDisplay[4].setScale(0.25,0.25);
-    CardDisplay[5].setScale(0.25,0.25);
-    CardDisplay[6].setScale(0.25,0.25);
-    CardDisplay[7].setScale(0.25,0.25);
-    CardDisplay[8].setScale(0.25,0.25);
-    CardDisplay[9].setScale(0.25,0.25);
-    CardDisplay[10].setScale(0.25,0.25);
+    CardDisplay[0].setScale(0.15,0.15);
+    CardDisplay[1].setScale(0.15,0.15);
+    CardDisplay[2].setScale(0.15,0.15); //To Be Changed When assets change / Make for variable window sizes
+    CardDisplay[3].setScale(0.15,0.15);
+    CardDisplay[4].setScale(0.15,0.15);
+    CardDisplay[5].setScale(0.15,0.15);
+    CardDisplay[6].setScale(0.15,0.15);
+    CardDisplay[7].setScale(0.15,0.15);
+    CardDisplay[8].setScale(0.15,0.15);
+    CardDisplay[9].setScale(0.15,0.15);
+    CardDisplay[10].setScale(0.15,0.15);
 
     //Card Cover
-    CardDisplay[10].setPosition(sf::Vector2f(200, 100));
+    CardDisplay[10].setPosition(sf::Vector2f(625, 225));
     CardDisplay[10].setTexture(CardBack);
 
     //Dealer Cards
-    CardDisplay[0].setPosition(sf::Vector2f(100, 100));
-    CardDisplay[1].setPosition(sf::Vector2f(200, 100));
-    CardDisplay[2].setPosition(sf::Vector2f(300, 100));
-    CardDisplay[3].setPosition(sf::Vector2f(400, 100));
-    CardDisplay[4].setPosition(sf::Vector2f(500, 100));
+    CardDisplay[0].setPosition(sf::Vector2f(525, 225));
+    CardDisplay[1].setPosition(sf::Vector2f(625, 225));
+    CardDisplay[2].setPosition(sf::Vector2f(725, 225));
+    CardDisplay[3].setPosition(sf::Vector2f(825, 225));
+    CardDisplay[4].setPosition(sf::Vector2f(925, 225));
     //Player Cards
-    CardDisplay[5].setPosition(sf::Vector2f(100, 500));
-    CardDisplay[6].setPosition(sf::Vector2f(200, 500));
-    CardDisplay[7].setPosition(sf::Vector2f(300, 500));
-    CardDisplay[8].setPosition(sf::Vector2f(400, 500));
-    CardDisplay[9].setPosition(sf::Vector2f(500, 500));
+    CardDisplay[5].setPosition(sf::Vector2f(625, 600));
+    CardDisplay[6].setPosition(sf::Vector2f(725, 600));
+    CardDisplay[7].setPosition(sf::Vector2f(825, 600));
+    CardDisplay[8].setPosition(sf::Vector2f(925, 600));
+    CardDisplay[9].setPosition(sf::Vector2f(1025, 600));
 
 
 

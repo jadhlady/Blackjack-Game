@@ -31,7 +31,7 @@ Game::Game(float width, float height, sf::RenderWindow &window) {
     Win.setOutlineThickness(3);
     Win.setString("You Won!");
     Win.setCharacterSize(100);
-    Win.setPosition(sf::Vector2f(width / 2, height / 2));
+    Win.setPosition(sf::Vector2f(475, 0));
 
     Lose.setFont(WinLoseDraw);
     Lose.setFillColor(sf::Color::Black);
@@ -39,15 +39,15 @@ Game::Game(float width, float height, sf::RenderWindow &window) {
     Lose.setOutlineThickness(3);
     Lose.setString("You Lose...");
     Lose.setCharacterSize(100);
-    Lose.setPosition(sf::Vector2f(width / 2, height / 2));
+    Lose.setPosition(sf::Vector2f(475, 0));
 
     Draw.setFont(WinLoseDraw);
     Draw.setFillColor(sf::Color::Black);
-    Draw.setOutlineColor(sf::Color::Black);
+    Draw.setOutlineColor(sf::Color::Blue);
     Draw.setOutlineThickness(3);
     Draw.setString("Draw");
     Draw.setCharacterSize(100);
-    Draw.setPosition(sf::Vector2f(width / 2, height / 2));
+    Draw.setPosition(sf::Vector2f(600, 0));
 
 
 
